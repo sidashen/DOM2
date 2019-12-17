@@ -51,6 +51,7 @@ tbody tr:hover {
 .checkbox:hover {
   cursor: pointer;
   color: red;
+  text-decoration: underline;
 }
 
 .button {
@@ -152,44 +153,15 @@ img {
   font-weight: bold;
 }
 
-.foot .selected {
+.foot {
   cursor: pointer;
-}
-
-.foot .selected .arrow {
   position: relative;
   top:-3px;
-  margin-left: 3px;
+  margin-left: 0;
 }
 
-.foot .selected .down {
-  position: relative;
-  top:3px;
-  display: none;
-}
-
-.show .selected .down {
-  display: inline;
-}
-
-.show .selected .up {
-  display: none;
-}
-
-.foot .selected:hover .arrow {
+.foot .selected:hover {
   color: red;
-}
-
-.foot .selected-view {
-  width: 935px;
-  border: 1px solid #c8c8c8;
-  position: absolute;
-  height: auto;
-  background: #ffffff;
-  z-index: 9;
-  bottom: 48px;
-  left: -1px;
-  display:none;
 }
 
 .show .selected-view {

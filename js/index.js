@@ -47,10 +47,9 @@ window.onload = function() {
   var tbody = document.getElementById('tbMain');
 
   for (var i = 0; i < cartProducts.length; i++) {
-       var trow = getDataRow(cartProducts[i]);
-       tbody.appendChild(trow);
+    var trow = getDataRow(cartProducts[i]);
+    tbody.appendChild(trow);
   }
-}
 
   function getDataRow(h) {
     var row = document.createElement('tr');
@@ -91,18 +90,53 @@ window.onload = function() {
     row.appendChild(countCell);
 
     var subtotalCell = document.createElement('td');
-    subtotalCell.innerHTML = h.price * h.count;
     row.appendChild(subtotalCell);
 
     reduceBtn.addEventListener('click', reduce);
+    reduceBtn.addEventListener('click', subtotal);
+    reduceBtn.addEventListener('click', sum);
+    addBtn.addEventListener('click', add);
+    addBtn.addEventListener('click', subtotal);
+    addBtn.addEventListener('click', sum);
+    checkBox.addEventListener('click', sum);
 
     function reduce() {
       count.value--;
+        if (count.value<=0) {
+            row.parentNode.removeChild(row);
+        }
     }
 
+    function add() {
+      count.value++;
+    }
+
+    function subtotal() {
+      subtotalCell.innerHTML = h.price * count.value;
+    }
+
+    subtotal();
+
+    var totalPriceDOM = document.getElementById('priceTotal');
+    
+    function sum() {
+      var totalPrice = 0;
+      var rows = document.getElementsByTagName('tr');
+
+      for (var j = 1; j < rows.length; j++) {
+        var checkValue = rows[j].childNodes[0].childNodes[0];
+        if (checkValue.checked) {
+          var price = rows[j].childNodes[4].innerHTML;
+          totalPrice += Number(price);
+        }
+      }
+      totalPriceDOM.innerHTML = totalPrice;
+    }
+
+    sum();
+
     return row;
+  }
 }
-
-
-
+  
 
