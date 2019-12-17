@@ -56,7 +56,7 @@ window.onload = function() {
 
     var checkCell = document.createElement('td');
     var checkBox = document.createElement("input");
-    checkBox.setAttribute("class","checkbox");
+    checkBox.setAttribute("class","check-box");
     checkBox.setAttribute("type","checkbox");
     checkBox.setAttribute("id", h.id);
     checkBox.checked = h.checked;
@@ -91,20 +91,32 @@ window.onload = function() {
 
     var subtotalCell = document.createElement('td');
     row.appendChild(subtotalCell);
+    
+    var checkAll = document.getElementsByClassName('check-all');
+    checkAll[0].addEventListener('click', function(){
+      selectAll();
+      sum();
+    });
 
-    reduceBtn.addEventListener('click', reduce);
-    reduceBtn.addEventListener('click', subtotal);
-    reduceBtn.addEventListener('click', sum);
-    addBtn.addEventListener('click', add);
-    addBtn.addEventListener('click', subtotal);
-    addBtn.addEventListener('click', sum);
+    reduceBtn.addEventListener('click', function() {
+      reduce();
+      subtotal();
+      sum();
+    });
+
+    addBtn.addEventListener('click', function() {
+      add();
+      subtotal();
+      sum();
+    });
+
     checkBox.addEventListener('click', sum);
-
+    
     function reduce() {
       count.value--;
-        if (count.value<=0) {
-            row.parentNode.removeChild(row);
-        }
+      if (count.value<=0) {
+        row.parentNode.removeChild(row);
+      }
     }
 
     function add() {
@@ -135,8 +147,19 @@ window.onload = function() {
 
     sum();
 
+    var select = false;
+    function selectAll() {
+      var rows = document.getElementsByTagName('tr');
+      for (var k = 1; k < rows.length; k++) {
+        var checkValue = rows[k].childNodes[0].childNodes[0];
+        checkBox.checked = select ? false : true;
+      }
+      select =! select
+      sum();
+    }
+
     return row;
   }
 }
-  
+
 

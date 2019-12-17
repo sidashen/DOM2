@@ -48,7 +48,7 @@ tbody tr:hover {
   background: RGB(238,246,255);
 }
 
-.checkbox:hover {
+.check-box:hover {
   cursor: pointer;
   color: red;
   text-decoration: underline;
