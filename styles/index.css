@@ -9,8 +9,7 @@ a {
 }
 
 body {
-  padding: 20px;
-  color: #666;
+  padding: 20px 0 20px 150px;
 }
 
 .fl{
@@ -29,6 +28,13 @@ table {
   width: 937px;
 }
 
+.table-title {
+  font-family: fantasy;
+  font-size: 30px;
+  font-weight: bolder;
+  color: pink;
+}
+
 th, td {
   border: 1px solid #CADEFF;
 }
@@ -37,15 +43,23 @@ th {
   background: #e2f2ff;
   border-top: 3px solid #a7cbff;
   height: 30px;
+  position: relative;
 }
 
 td {
   padding: 10px;
   color: #444;
+  text-align: center;
+  vertical-align: middle;
 }
 
 tbody tr:hover {
   background: RGB(238,246,255);
+}
+
+.albumName {
+  position: relative;
+  top: 31px;
 }
 
 .check-box:hover {
@@ -102,7 +116,7 @@ tbody tr:hover {
 img {
   width: 100px;
   height: 80px;
-  /*border: 1px solid #ccc;*/
+  border: 1px solid #ccc;
   margin-right: 10px;
   float: left;
 }
