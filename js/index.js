@@ -54,6 +54,7 @@ var rows = document.getElementsByTagName('tr');
 var totalPriceDOM = document.getElementById('priceTotal');
 var totalItem = document.getElementById('item-total-count');
 var checkAll = document.getElementsByClassName('check-all');
+var checkSingle = document.getElementsByClassName('check-box');
 
 shoppingCart();
 sum();
@@ -86,9 +87,12 @@ function getDataRow(items) {
     sum();
   });
 
-  checkBox.addEventListener('click', sum);
+  checkBox.addEventListener('click', function() {
+    isSelectAll();
+    sum();
+  });
   
-  checkAll[0].addEventListener('click', function(){
+  checkAll[0].addEventListener('click', function() {
     selectAll();
     sum();
   });
@@ -195,4 +199,14 @@ function sum() {
   }
   totalPriceDOM.innerHTML = totalPrice;
   totalItem.innerHTML = totalCount;
+}
+
+function isSelectAll() {
+  var isSelectAll = true;
+  for (i = 0; i < checkSingle.length; i++) {
+    if (!checkSingle[i].checked) {
+        isSelectAll = false;
+    }
+  }
+  checkAll[0].checked = isSelectAll;
 }
