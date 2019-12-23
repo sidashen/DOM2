@@ -57,7 +57,7 @@ tbody tr:hover {
   background: RGB(238,246,255);
 }
 
-.albumName {
+.album-name {
   position: relative;
   top: 31px;
 }
@@ -161,7 +161,7 @@ img {
   cursor: pointer;
 }
 
-.foot  #priceTotal, .foot #selectedTotal {
+.foot  #price-total, .foot #selectedTotal {
   color: red;
   font-family: "Microsoft Yahei";
   font-weight: bold;
@@ -200,37 +200,4 @@ img {
   position: absolute;
   left: 0px;
   bottom: 1px;
-}
-
-#selectedViewList {
-  padding: 20px;
-  margin-bottom: -20px;
-}
-
-#selectedViewList div{
-  display: inline-block;
-  position: relative;
-  width: 100px;
-  height: 80px;
-  border: 1px solid #ccc;
-  margin: 10px;
-}
-
-#selectedViewList div span {
-  display: none;
-  color: #ffffff;
-  font-size: 12px;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 60px;
-  height: 18px;
-  line-height: 18px;
-  text-align: center;
-  background: RGBA(0,0,0,.5);
-  cursor: pointer;
-}
-
-#selectedViewList div:hover span {
-  display: block;
 }

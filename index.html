@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>DOM2</title>
-  <script type="text/javascript" src="js/index.js"></script>
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
@@ -19,14 +18,17 @@
           <th>总价（￥）</th>
       </tr>
   </thead>
-  <tbody id="tbMain"></tbody>
+  <tbody id="shopping-cart-information"></tbody>
 </table>
 
 <div class="foot" id="foot">
   <label class="fl select-all"><input type="checkbox" class="check-all check"/>&nbsp;全选</label>
   <div class="fr closing">结 算</div>
   <div class="fr total">合计：￥<span id="priceTotal"></span></div>
+  <div class="fr show-item-count">共有 <span id="item-total-count"></span>件商品</div>
 </div>
+
+<script type="text/javascript" src="js/index.js"></script>
 
 </body>
 </html>
