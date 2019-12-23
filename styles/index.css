@@ -103,11 +103,7 @@ tbody tr:hover {
   font-weight: bold;
 }
 
-.operation {
-  width: 80px;
-}
-
-.operation span:hover, a:hover {
+a:hover {
   cursor: pointer;
   color: red;
   text-decoration: underline;
@@ -172,32 +168,4 @@ img {
   position: relative;
   top:-3px;
   margin-left: 0;
-}
-
-.foot .selected:hover {
-  color: red;
-}
-
-.show .selected-view {
-  display: block;
-}
-
-.foot .selected-view div{
-  height: auto;
-}
-
-.foot .selected-view .arrow {
-  font-size: 16px;
-  line-height: 100%;
-  color:#c8c8c8;
-  position: absolute;
-  right: 330px;
-  bottom: -9px;
-}
-
-.foot .selected-view .arrow span {
-  color: #ffffff;
-  position: absolute;
-  left: 0px;
-  bottom: 1px;
 }

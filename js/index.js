@@ -74,6 +74,7 @@ function getDataRow(items) {
   getPrice(items, row);
   var { reduceBtn, addBtn, count } = getCount(items, row);
   var subtotalCell = getSubtotalPrice(row);
+  subtotal(subtotalCell, items, count);
 
   reduceBtn.addEventListener('click', function() {
     reduce(count, row);
@@ -93,21 +94,9 @@ function getDataRow(items) {
   });
   
   checkAll[0].addEventListener('click', function() {
-    selectAll();
+    selectAll(event);
     sum();
   });
-    
-  subtotal(subtotalCell, items, count);
-
-  var select = false;
-  function selectAll() {
-    for (var k = 1; k < rows.length; k++) {
-      var checkBox = rows[k].childNodes[0].childNodes[0];
-      checkBox.checked = select ? false : true;
-    }
-    select =! select;
-    sum();
-  }
 
   return row;
 }
@@ -209,4 +198,12 @@ function isSelectAll() {
     }
   }
   checkAll[0].checked = isSelectAll;
+}
+
+function selectAll(event) {
+  checkAll.checked = event.target.checked;
+  for (var i = 0; i < checkSingle.length; i++) {
+    checkSingle[i].checked = event.target.checked;
+  }
+  sum();
 }
