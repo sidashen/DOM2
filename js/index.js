@@ -92,6 +92,8 @@ function getDataRow(items) {
     selectAll();
     sum();
   });
+    
+  subtotal(subtotalCell, items, count);
 
   var select = false;
   function selectAll() {
@@ -102,8 +104,6 @@ function getDataRow(items) {
     select =! select;
     sum();
   }
-    
-  subtotal(subtotalCell, items, count);
 
   return row;
 }
@@ -124,7 +124,7 @@ function getImgData(items, row) {
   var nameCell = document.createElement('td');
   var imgBlock = document.createElement('img');
   var nameBlock = document.createElement('span');
-  imgBlock.src = items.album;
+  imgBlock.setAttribute('src', items.album);
   nameBlock.innerHTML = items.name;
   nameBlock.setAttribute('class', 'album-name');
   nameCell.appendChild(nameBlock);
