@@ -75,18 +75,7 @@ function ShoppingCart() {
     checkCell.appendChild(checkBox);
     row.appendChild(checkCell);
 
-    getImgData(cartProducts[i]);
-    var nameCell = document.createElement('td');
-    row.appendChild(nameCell);
-    // var nameCell = document.createElement('td');
-    // var imgBlock = document.createElement('img');
-    // var nameBlock = document.createElement('span');
-    // imgBlock.src = h.album;
-    // nameBlock.innerHTML = h.name;
-    // nameBlock.setAttribute('class','albumName');
-    // nameCell.appendChild(nameBlock);
-    // nameCell.appendChild(imgBlock);
-    // row.appendChild(nameCell);
+    getImgData(h, row);
 
     var priceCell = document.createElement('td');
     priceCell.innerHTML = h.price;
@@ -162,7 +151,6 @@ function ShoppingCart() {
 
     return row;
   }
-}
 
 function sum() {
   var totalPrice = 0;
@@ -176,15 +164,17 @@ function sum() {
     }
   }
   totalPriceDOM.innerHTML = totalPrice;
+  }
 }
 
-function getImgData(h) {
+function getImgData(h, row) {
   var nameCell = document.createElement('td');
   var imgBlock = document.createElement('img');
   var nameBlock = document.createElement('span');
   imgBlock.src = h.album;
   nameBlock.innerHTML = h.name;
-  nameBlock.setAttribute('class','album-name');
+  nameBlock.setAttribute('class', 'albumName');
   nameCell.appendChild(nameBlock);
   nameCell.appendChild(imgBlock);
+  row.appendChild(nameCell);
 }
