@@ -59,73 +59,58 @@ shoppingCart();
 sum();
 
 function shoppingCart() {
-  
-
   for (var i = 0; i < cartProducts.length; i++) {
     var trow = getDataRow(cartProducts[i]);
     shoppingCartInformation.appendChild(trow);
   }
+}
 
-  function getDataRow(items) {
-    
-    var row = document.createElement('tr');
+function getDataRow(items) {
+  var row = document.createElement('tr');
 
-    var checkBox = getCheckStatus(items, row);
-    getImgData(items, row);
-    getPrice(items, row);
-    var { reduceBtn, addBtn, count } = getCount(items, row);
-    var subtotalCell = getSubtotalPrice(row);
+  var checkBox = getCheckStatus(items, row);
+  getImgData(items, row);
+  getPrice(items, row);
+  var { reduceBtn, addBtn, count } = getCount(items, row);
+  var subtotalCell = getSubtotalPrice(row);
 
-    reduceBtn.addEventListener('click', function() {
-      reduce();
-      subtotal();
-      sum();
-    });
-
-    addBtn.addEventListener('click', function() {
-      add();
-      subtotal();
-      sum();
-    });
-
-    checkBox.addEventListener('click', sum);
-    
-    checkAll[0].addEventListener('click', function(){
-      selectAll();
-      sum();
-    });
-    
-    function reduce() {
-      count.value--;
-      if (count.value<=0) {
-        row.parentNode.removeChild(row);
-      }
-    }
-
-    function add() {
-      count.value++;
-    }
-
-    function subtotal() {
-      subtotalCell.innerHTML = items.price * count.value;
-    }
-
+  reduceBtn.addEventListener('click', function() {
+    reduce(count, row);
     subtotal();
-    
-    var select = false;
-    function selectAll() {
-      var rows = document.getElementsByTagName('tr');
-      for (var k = 1; k < rows.length; k++) {
-        var checkValue = rows[k].childNodes[0].childNodes[0];
-        checkBox.checked = select ? false : true;
-      }
-      select =! select;
-      sum();
-    }
+    sum();
+  });
 
-    return row;
+  addBtn.addEventListener('click', function() {
+    add(count);
+    subtotal();
+    sum();
+  });
+
+  checkBox.addEventListener('click', sum);
+  
+  checkAll[0].addEventListener('click', function(){
+    selectAll();
+    sum();
+  });
+  
+  function subtotal() {
+    subtotalCell.innerHTML = items.price * count.value;
   }
 
+  subtotal();
+  
+  var select = false;
+  function selectAll() {
+    var rows = document.getElementsByTagName('tr');
+    for (var k = 1; k < rows.length; k++) {
+      var checkValue = rows[k].childNodes[0].childNodes[0];
+      checkBox.checked = select ? false : true;
+    }
+    select =! select;
+    sum();
+  }
+
+  return row;
 }
 
 function getSubtotalPrice(row) {
@@ -202,3 +187,13 @@ function sum() {
   // totalItem.innerHTML = totalCount;
 }
 
+function reduce(count, row) {
+  count.value--;
+  if (count.value<=0) {
+    row.parentNode.removeChild(row);
+  }
+}
+
+function add(count) {
+  count.value++;
+}
