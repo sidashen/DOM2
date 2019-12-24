@@ -5,7 +5,7 @@ shoppingCart();
 sum();
 
 function shoppingCart() {
-  var shoppingCartInformation = document.getElementById('shopping-cart-information');
+  var shoppingCartOutline = document.getElementById('shopping-cart-information');
   var cartProducts = [
     {
       "id": 1,
@@ -58,12 +58,12 @@ function shoppingCart() {
   ]
 
   for (var i = 0; i < cartProducts.length; i++) {
-    var trow = getDataRow(cartProducts[i]);
-    shoppingCartInformation.appendChild(trow);
+    var trow = getShoppingCartInformation(cartProducts[i]);
+    shoppingCartOutline.appendChild(trow);
   }
 }
 
-function getDataRow(items) {
+function getShoppingCartInformation(items) {
   var row = document.createElement('tr');
 
   getCheckStatus(items, row);
