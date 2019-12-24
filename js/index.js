@@ -49,17 +49,15 @@ var cartProducts = [
   }
 ]
 
-var shoppingCartInformation = document.getElementById('shopping-cart-information');
-var rows = document.getElementsByTagName('tr');
-var totalPriceDOM = document.getElementById('priceTotal');
-var totalItem = document.getElementById('item-total-count');
 var checkAll = document.getElementsByClassName('check-all');
 var checkSingle = document.getElementsByClassName('check-box');
+var subtotalCell = document.createElement('td');
 
 shoppingCart();
 sum();
 
 function shoppingCart() {
+  var shoppingCartInformation = document.getElementById('shopping-cart-information');
   for (var i = 0; i < cartProducts.length; i++) {
     var trow = getDataRow(cartProducts[i]);
     shoppingCartInformation.appendChild(trow);
@@ -69,30 +67,12 @@ function shoppingCart() {
 function getDataRow(items) {
   var row = document.createElement('tr');
 
-  var checkBox = getCheckStatus(items, row);
+  getCheckStatus(items, row);
   getImgData(items, row);
   getPrice(items, row);
-  var { reduceBtn, addBtn, count } = getCount(items, row);
-  var subtotalCell = getSubtotalPrice(row);
-  subtotal(subtotalCell, items, count);
+  var count = getCount(items, row);
+  getSubtotalPriceData(row, items, count);
 
-  reduceBtn.addEventListener('click', function() {
-    reduce(count, row);
-    subtotal(subtotalCell, items, count);
-    sum();
-  });
-
-  addBtn.addEventListener('click', function() {
-    add(count);
-    subtotal(subtotalCell, items, count);
-    sum();
-  });
-
-  checkBox.addEventListener('click', function() {
-    isSelectAll();
-    sum();
-  });
-  
   checkAll[0].addEventListener('click', function() {
     selectAll(event);
     sum();
@@ -110,7 +90,12 @@ function getCheckStatus(items, row) {
   checkBox.checked = items.checked;
   checkCell.appendChild(checkBox);
   row.appendChild(checkCell);
-  return checkBox;
+
+  checkBox.addEventListener('click', function() {
+    isSelectAll();
+    sum();
+  });
+  
 }
 
 function getImgData(items, row) {
@@ -134,28 +119,46 @@ function getPrice(items, row) {
 function getCount(items, row) {
   var countCell = document.createElement('td');
   var countDiv = document.createElement('div');
-  var reduceBtn = document.createElement('span');
-  reduceBtn.setAttribute('class', 'button');
-  reduceBtn.innerHTML = '-';
+  var reduceCountBtn = document.createElement('span');
+  reduceCountBtn.setAttribute('class', 'button');
+  reduceCountBtn.innerHTML = '-';
   var count = document.createElement('input');
   count.setAttribute('class', 'count');
   count.setAttribute('type', 'text');
   count.setAttribute('value', items.count);
-  var addBtn = document.createElement('span');
-  addBtn.setAttribute('class', 'button');
-  addBtn.innerHTML = '+';
-  countDiv.appendChild(reduceBtn);
+  var addCountBtn = document.createElement('span');
+  addCountBtn.setAttribute('class', 'button');
+  addCountBtn.innerHTML = '+';
+  countDiv.appendChild(reduceCountBtn);
   countDiv.appendChild(count);
-  countDiv.appendChild(addBtn);
+  countDiv.appendChild(addCountBtn);
   countCell.appendChild(countDiv);
   row.appendChild(countCell);
-  return { reduceBtn, addBtn, count };
+
+  reduceCountBtn.addEventListener('click', function() {
+    reduce(count, row);
+    getSubtotalPrice(subtotalCell, items, count)
+    sum();
+  });
+
+  addCountBtn.addEventListener('click', function() {
+    add(count);
+    getSubtotalPrice(subtotalCell, items, count)
+    sum();
+  });
+
+  return count;
 }
 
-function getSubtotalPrice(row) {
+function getSubtotalPriceData(row, items, count) {
   var subtotalCell = document.createElement('td');
   row.appendChild(subtotalCell);
-  return subtotalCell;
+  
+  getSubtotalPrice(subtotalCell, items, count);
+}
+
+function getSubtotalPrice(subtotalCell, items, count) {
+  subtotalCell.innerHTML = items.price * count.value;
 }
 
 function reduce(count, row) {
@@ -169,13 +172,12 @@ function add(count) {
   count.value++;
 }
 
-function subtotal(subtotalCell, items, count) {
-  subtotalCell.innerHTML = items.price * count.value;
-}
-
 function sum() {
   var totalPrice = 0;
   var totalCount = 0;
+  var rows = document.getElementsByTagName('tr');
+  var totalPriceDOM = document.getElementById('priceTotal');
+  var totalItem = document.getElementById('item-total-count');
 
   for (var j = 1; j < rows.length; j++) {
     var checkValue = rows[j].childNodes[0].childNodes[0];
