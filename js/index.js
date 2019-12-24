@@ -1,6 +1,5 @@
 var checkAll = document.getElementsByClassName('check-all');
 var checkSingle = document.getElementsByClassName('check-box');
-var subtotalCell = document.createElement('td');
 
 shoppingCart();
 sum();
@@ -57,7 +56,7 @@ function shoppingCart() {
       "album":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576650929346&di=87a26e9055a9962b2cfd850ab1a23b45&imgtype=0&src=http%3A%2F%2Fcdn.duitang.com%2Fuploads%2Fitem%2F201501%2F02%2F20150102130729_UGm2U.jpeg"
     }
   ]
-  
+
   for (var i = 0; i < cartProducts.length; i++) {
     var trow = getDataRow(cartProducts[i]);
     shoppingCartInformation.appendChild(trow);
@@ -136,12 +135,14 @@ function getCount(items, row) {
   row.appendChild(countCell);
 
   reduceCountBtn.addEventListener('click', function() {
+    var subtotalCell = this.parentNode.parentNode.parentNode.childNodes[4];
     reduce(count, row);
     getSubtotalPrice(subtotalCell, items, count);
     sum();
   });
 
   addCountBtn.addEventListener('click', function() {
+    var subtotalCell = this.parentNode.parentNode.parentNode.childNodes[4];
     add(count);
     getSubtotalPrice(subtotalCell, items, count);
     sum();
