@@ -201,7 +201,6 @@ function isSelectAll() {
 }
 
 function selectAll(event) {
-  checkAll.checked = event.target.checked;
   for (var i = 0; i < checkSingle.length; i++) {
     checkSingle[i].checked = event.target.checked;
   }
